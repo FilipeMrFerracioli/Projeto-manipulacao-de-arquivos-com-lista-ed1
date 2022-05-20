@@ -1,9 +1,5 @@
 #include "ordena.h"
 
-
-#include <iostream>
-
-
 namespace minhaNamespace {
 
 Ordena::Ordena():
@@ -23,10 +19,9 @@ Ordena::Ordena(QString linhaPessoa, bool ePorNome):
 
 Pessoa Ordena::splitPessoa(QString linhaPessoa)
 {
-    QStringList pessoa = linhaPessoa.split(";");
+    //    if(linhaPessoa == "") return Pessoa();
 
-    //    std::cout << pessoa[0].toStdString(); // funcionando
-    //    std::cout << pessoa[1].toStdString(); // funcionando
+    QStringList pessoa = linhaPessoa.split(";");
 
     Pessoa p;
 
@@ -34,31 +29,37 @@ Pessoa Ordena::splitPessoa(QString linhaPessoa)
     p.setNome(pessoa[1]);
     p.setPorNome(ePorNome);
 
-    //    std::cout << QString::number(p.getMatricula()).toStdString(); // funcionando
-    //    std::cout << p.getNome().toStdString(); // funcionando
-
     return p;
-    //    return Pessoa(pessoa[0].toInt(), pessoa[1], getEPorNome());
 }
 
 void Ordena::setListaPessoas(Pessoa pessoa)
 {
-    //    std::cout << QString::number(pessoa.getMatricula()).toStdString(); // funcionando
-    //    std::cout << pessoa.getNome().toStdString(); // funcionando
-
     listaPessoas.inserirOrdenado(pessoa);
-
-    //    std::cout << listaPessoas.getQuantidadeDeElementos();
 }
 
 QString Ordena::getListaPessoas() const
 {
     QString res = "";
     for(int i = 0; i < listaPessoas.getQuantidadeDeElementos(); i++) {
+        //        if(!(QString::number(listaPessoas[i].getMatricula()) == "" && listaPessoas[i].getNome() == "")){
         res += "Matricula: " + QString::number(listaPessoas[i].getMatricula());
         res += "\n";
         res += "Nome: " + listaPessoas[i].getNome();
-        res += "\n";
+        //        }
+        if(i < (listaPessoas.getQuantidadeDeElementos() - 1)) res += "\n\n";
+    }
+
+    return res;
+}
+
+QString Ordena::getListaPessoasSemFormatacao() const
+{
+    QString res = "";
+    for(int i = 0; i < listaPessoas.getQuantidadeDeElementos(); i++) {
+        res += QString::number(listaPessoas[i].getMatricula());
+        res += ";";
+        res += listaPessoas[i].getNome();
+        if(i < (listaPessoas.getQuantidadeDeElementos() - 1)) res += "\n";
     }
 
     return res;

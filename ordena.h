@@ -4,6 +4,7 @@
 #include <QStringList>
 #include <LLDE.h>
 #include <pessoa.h>
+#include <iostream>
 
 namespace minhaNamespace {
 class Ordena
@@ -28,6 +29,7 @@ public:
     void setListaPessoas(Pessoa pessoa);
 
     QString getListaPessoas() const;
+    QString getListaPessoasSemFormatacao() const;
 };
 }
 

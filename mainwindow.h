@@ -5,7 +5,9 @@
 #include <QMessageBox>
 #include <QFileDialog>
 #include <fstream> // para arquivos
+#include <sstream> // writing to memory (a string)
 #include <ordena.h>
+#include <pessoa.h>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -34,6 +36,6 @@ private slots:
 
 private:
     Ui::MainWindow *ui;
-    minhaNamespace::Ordena ordena;
+    minhaNamespace::Ordena *ordena;
 };
 #endif // MAINWINDOW_H

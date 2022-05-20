@@ -4,6 +4,7 @@
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
+    , ordena(new minhaNamespace::Ordena)
 {
     ui->setupUi(this);
 }
@@ -29,24 +30,20 @@ void MainWindow::on_actionAbrir_triggered()
         if(!arquivo.is_open()) throw QString("Erro: arquivo não pode ser aberto.");
 
         std::string linha = "";
-        QString texto = "";
 
         std::getline(arquivo, linha);
 
-        //        while(!arquivo.eof()) {
-        //            texto += QString::fromStdString(linha);
-        //            texto += "\n";
-
-        //            std::getline(arquivo, linha);
-        //        }
+        if(ui->comboBoxPorTipo->currentIndex() == 0) ordena->setPorNome(true);
 
         while(!arquivo.eof()) {
-            ordena.setListaPessoas(ordena.splitPessoa(QString::fromStdString(linha)));
+            ordena->setListaPessoas(ordena->splitPessoa(QString::fromStdString(linha)));
+
+            std::getline(arquivo, linha);
         }
 
         arquivo.close();
 
-        ui->textEditSaida->setText(ordena.getListaPessoas());
+        ui->textEditSaida->setText(ordena->getListaPessoasSemFormatacao());
     }  catch (QString &erro) {
         QMessageBox::information(this, "Erro", erro);
     }
@@ -122,10 +119,43 @@ void MainWindow::on_pushButtonAdicionar_clicked()
 
 void MainWindow::on_comboBoxPorTipo_activated(int index)
 {
-    if(index == 0) ordena.setPorNome(true);
-    if(index == 1) ordena.setPorNome(false);
-}
+    try {
+        //        ui->textEditSaida->clear();
 
+        //        if(index == 0) {
+        //            ordena->setPorNome(true);
+
+        //            //        ui->textEditSaida->clear();
+
+        //            std::string reordenar = "";
+        //            reordenar = ordena->getListaPessoasSemFormatacao().toStdString();
+
+        //            std::getline(std::cin, reordenar);
+
+        //            while(!reordenar.empty()) {
+        //                ordena->setListaPessoas(ordena->splitPessoa(QString::fromStdString(reordenar)));
+
+        //                std::getline(std::cin, reordenar);
+        //            }
+
+        //            //        ui->textEditSaida->setText(ordena->getListaPessoas());
+        //        }
+
+        //        if(index == 1) {
+        //            std::ifstream file;
+        //            std::string content;
+        //            content = ordena->getListaPessoasSemFormatacao().toStdString();
+
+        //            while(file >> content) {
+        //                ordena->setListaPessoas(ordena->splitPessoa(QString::fromStdString(content)));
+        //            }
+        //        }
+
+        //        ui->textEditSaida->setText(ordena->getListaPessoas());
+    }  catch (QString &erro) {
+        QMessageBox::information(this, "Erro", erro);
+    }
+}
 
 void MainWindow::on_comboBoxPorAlfabeto_activated(int index)
 {
