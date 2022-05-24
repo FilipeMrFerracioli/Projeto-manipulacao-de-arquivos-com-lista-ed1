@@ -37,6 +37,52 @@ void Ordena::setListaPessoas(Pessoa pessoa)
     listaPessoas.inserirOrdenado(pessoa);
 }
 
+QString Ordena::getListaAsc() const
+{
+    QString res = "";
+    for(int i = 0; i < listaPessoas.getQuantidadeDeElementos(); i++) {
+        res += "Matricula: " + QString::number(listaPessoas[i].getMatricula());
+        res += "\n";
+        res += "Nome: " + listaPessoas[i].getNome();
+
+        if(i < (listaPessoas.getQuantidadeDeElementos() - 1)) res += "\n\n";
+    }
+
+    return res;
+}
+
+QString Ordena::getListaDesc() const
+{
+    QString res = "";
+    for(int i = listaPessoas.getQuantidadeDeElementos(); i > 0; i--) {
+        res += "Matricula: " + QString::number(listaPessoas[i].getMatricula());
+        res += "\n";
+        res += "Nome: " + listaPessoas[i].getNome();
+
+        if(i < (listaPessoas.getQuantidadeDeElementos() - 1)) res += "\n\n";
+    }
+
+    return res;
+}
+
+void Ordena::ordenarListaPorNome()
+{
+    setPorNome(true);
+
+    for(int i = 0; i < listaPessoas.getQuantidadeDeElementos(); i++) {
+        listaPessoas.inserirOrdenado(listaPessoas.retirarPos(i));
+    }
+}
+
+void Ordena::ordenarListaPorMatricula()
+{
+    setPorNome(false);
+
+    for(int i = 0; i < listaPessoas.getQuantidadeDeElementos(); i++) {
+        listaPessoas.inserirOrdenado(listaPessoas.retirarPos(i));
+    }
+}
+
 QString Ordena::getListaPessoas() const
 {
     QString res = "";

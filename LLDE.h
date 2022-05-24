@@ -177,7 +177,7 @@ public:
         }
     }
 
-    T retirarPos(T pos)
+    T retirarPos(int pos)
     {
         if(estaVazio()) throw QString("Lista vazia!");
 
@@ -199,7 +199,7 @@ public:
 
         pAux2->getProximo()->setAnterior(pAux);
 
-        int dado = pAux2->getDado();
+        T dado = pAux2->getDado();
 
         delete pAux2;
 

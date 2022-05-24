@@ -28,6 +28,12 @@ public:
 
     void setListaPessoas(Pessoa pessoa);
 
+    QString getListaAsc() const;
+    QString getListaDesc() const;
+
+    void ordenarListaPorNome();
+    void ordenarListaPorMatricula();
+
     QString getListaPessoas() const;
     QString getListaPessoasSemFormatacao() const;
 };
