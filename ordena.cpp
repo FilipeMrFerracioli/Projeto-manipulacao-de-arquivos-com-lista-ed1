@@ -54,12 +54,13 @@ QString Ordena::getListaAsc() const
 QString Ordena::getListaDesc() const
 {
     QString res = "";
-    for(int i = listaPessoas.getQuantidadeDeElementos(); i > 0; i--) {
+    for(int i = listaPessoas.getQuantidadeDeElementos() - 1; i >= 0; i--) {
+        if(i < (listaPessoas.getQuantidadeDeElementos() - 1)) res += "\n\n";
         res += "Matricula: " + QString::number(listaPessoas[i].getMatricula());
         res += "\n";
         res += "Nome: " + listaPessoas[i].getNome();
 
-        if(i < (listaPessoas.getQuantidadeDeElementos() - 1)) res += "\n\n";
+        //if(i < (listaPessoas.getQuantidadeDeElementos() - 1)) res += "\n\n";
     }
 
     return res;

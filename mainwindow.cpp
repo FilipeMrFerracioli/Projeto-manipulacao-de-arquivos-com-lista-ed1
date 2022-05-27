@@ -120,38 +120,17 @@ void MainWindow::on_pushButtonAdicionar_clicked()
 void MainWindow::on_comboBoxPorTipo_activated(int index)
 {
     try {
-        //        ui->textEditSaida->clear();
+        if(index == 0) {
+            ordena->ordenarListaPorNome();
 
-        //        if(index == 0) {
-        //            ordena->setPorNome(true);
+            ui->textEditSaida->setText(ordena->getListaPessoas());
+        }
 
-        //            //        ui->textEditSaida->clear();
+        if(index == 1) {
+            ordena->ordenarListaPorMatricula();
 
-        //            std::string reordenar = "";
-        //            reordenar = ordena->getListaPessoasSemFormatacao().toStdString();
-
-        //            std::getline(std::cin, reordenar);
-
-        //            while(!reordenar.empty()) {
-        //                ordena->setListaPessoas(ordena->splitPessoa(QString::fromStdString(reordenar)));
-
-        //                std::getline(std::cin, reordenar);
-        //            }
-
-        //            //        ui->textEditSaida->setText(ordena->getListaPessoas());
-        //        }
-
-        //        if(index == 1) {
-        //            std::ifstream file;
-        //            std::string content;
-        //            content = ordena->getListaPessoasSemFormatacao().toStdString();
-
-        //            while(file >> content) {
-        //                ordena->setListaPessoas(ordena->splitPessoa(QString::fromStdString(content)));
-        //            }
-        //        }
-
-        //        ui->textEditSaida->setText(ordena->getListaPessoas());
+            ui->textEditSaida->setText(ordena->getListaPessoas());
+        }
     }  catch (QString &erro) {
         QMessageBox::information(this, "Erro", erro);
     }
@@ -159,5 +138,17 @@ void MainWindow::on_comboBoxPorTipo_activated(int index)
 
 void MainWindow::on_comboBoxPorAlfabeto_activated(int index)
 {
+    try {
+        if(index == 0) {
+            ui->textEditSaida->clear();
+            ui->textEditSaida->setText(ordena->getListaAsc());
+        }
 
+        if(index == 1) {
+            ui->textEditSaida->clear();
+            ui->textEditSaida->setText(ordena->getListaDesc());
+        }
+    }  catch (QString &erro) {
+        QMessageBox::information(this, "Erro", erro);
+    }
 }
